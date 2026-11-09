@@ -10,8 +10,48 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/snakewolf-lab/packages.git"
+            "type": "package",
+            "package": {
+                "name": "snakewolf/core",
+                "version": "dev-core",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/snakewolf-lab/packages.git",
+                    "reference": "core"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Snakewolf\\Core\\": "src/"
+                    }
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "snakewolf/ui",
+                "version": "dev-ui",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/snakewolf-lab/packages.git",
+                    "reference": "ui"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Snakewolf\\UI\\": "src/"
+                    }
+                },
+                "require": {
+                    "php": "^8.2"
+                },
+                "extra": {
+                    "laravel": {
+                        "providers": [
+                            "SnakeWolf\\UI\\UIServiceProvider"
+                        ]
+                    }
+                }
+            }
         }
     ],
     "require": {
