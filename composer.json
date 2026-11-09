@@ -10,26 +10,16 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "../../packages/core",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "../../packages/ui",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "https://github.com/snakewolf-lab/packages.git"
         }
     ],
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
-        "snakewolf/core": "@dev",
-        "snakewolf/ui": "@dev"
+        "snakewolf/core": "dev-core",
+        "snakewolf/ui": "dev-ui"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

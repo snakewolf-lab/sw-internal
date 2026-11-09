@@ -1,0 +1,38 @@
+name: Build and Push to Build Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # 1. 開発ブランチ (dev) のコードを取得
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+
+      # 2. Node.js のセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      # 3. パッケージインストール & アセットビルド (public/build の生成)
+      - name: Install dependencies & Build assets
+        run: |
+          npm ci
+          npm run build
+
+      # 4. build ブランチへ成果物を自動コミット＆Push
+      - name: Deploy to build branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: build
+          publish_dir: ./
+          keep_files: false
+          exclude_assets: ".git,.github,node_modules,tests,resources/css,resources/js"
+          commit_message: "build: production release (${{ github.sha }})"
